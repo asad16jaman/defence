@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Comment;
+use Illuminate\Support\Facades\View;
 use Request;
 use App\Models\User;
 use App\Models\Thread;
@@ -35,6 +36,16 @@ class AppServiceProvider extends ServiceProvider
         });
         Gate::define('commentLike',function(User $user,Comment $ob){
             return $ob->user_id != $user->id;
+        });
+
+
+        // limit function
+
+        View::share('word_limit',function(string $s1,int $size){
+            $arr = explode(" ",$s1);
+            $final = array_slice($arr,0,$size);
+            return implode(" ",$final);
+          
         });
 
 

@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\AdminUsersController;
+use App\Http\Controllers\admin\CourseController;
+use App\Http\Controllers\admin\LessonController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HandleLikeController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
@@ -78,6 +83,10 @@ Route::get('/catagory/{id}/delete', [CatagoryController::class,'delete'])->name(
 
 
 
+
+
+
+
 // front routing section
 
 Route::get('/dusscusstion',[DiscussionController::class,'index'])->name('discus.index');
@@ -92,9 +101,62 @@ Route::post('/comment/{id}',[CommentController::class,'store'])->name('comment.s
 Route::post('/comment/{id}/update',[CommentController::class,'update'])->name('comment.update');
 Route::post('/comment/{id}/delete',[CommentController::class,'delete'])->name('comment.delete');
 
-Route::get('/',[HomePageController::class,'index'])->name('home');
+
 
 Route::post('/like/{id}',[HandleLikeController::class,'store'])->name('like.add');
+
+
+
+Route::get('/',[HomePageController::class,'index'])->name('home');
+
+Route::get('/courses',[HomePageController::class,'allCourse'])->name('front.courses');
+Route::get('/course/{id}',[HomePageController::class,'course'])->name('front.course');
+Route::get('/checkout/{id}',[HomePageController::class,'checkout'])->name('front.checkout');
+
+
+
+
+//profile
+Route::prefix('/profile')->group(function(){
+
+    Route::get('/',[ProfileController::class,'index'])->name('profile');
+    Route::get('/edit_picture',[ProfileController::class,'editPicture'])->name('profile.edit.picture');
+    Route::get('/feedack',[ProfileController::class,'feedback'])->name('profile.feedback');
+    Route::get('/password',[ProfileController::class,'changePassword'])->name('profile.password.edit');
+
+
+
+
+
+});
+
+
+
+
+Route::prefix('/dashboard')->group(function(){
+    Route::get('/',[AdminController::class,'index']);
+
+    //courses
+    Route::get('/courses',[CourseController::class,'index'])->name('admin.courses');
+    Route::get('/courses/create',[CourseController::class,'create'])->name('admin.course.create');
+    Route::post('/courses/create',[CourseController::class,'store'])->name('admin.course.create');
+    Route::get('/courses/{id}/edit/',[CourseController::class,'edit'])->name('admin.course.edit');
+    Route::post('/courses/{id}/edit',[CourseController::class,'update'])->name('admin.course.edit');
+
+
+    //lesson
+    Route::get('/lessons/{course?}',[LessonController::class,'index'])->name('admin.lesson');
+    Route::get('/lesson/{course}/create',[LessonController::class,'create'])->name('admin.lesson.create');
+    Route::post('/lesson/{course}/create',[LessonController::class,'store'])->name('admin.lesson.create');
+
+
+
+    //users
+    Route::get('/users',[AdminUsersController::class,'index'])->name('admin.users');
+
+
+});
+
 
 
 
