@@ -13,7 +13,7 @@
             <a class="nav-link text-white active" aria-current="page" href="./#home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="./courses.php">Courses</a>
+            <a class="nav-link text-white" href="{{ route('front.courses') }}">Courses</a>
           </li>
 
           <li class="nav-item">
@@ -42,13 +42,13 @@
             </button>
             <ul class="dropdown-menu manu-margin">
               @auth
-                <li><a class="dropdown-item" href="">Profile</a></li>
-                <li><a class="dropdown-item" href="">Logout</a></li>
+                <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
               @endauth
 
               @guest
-              <li><a class="dropdown-item" href="">Login</a></li>
-              <li><a class="dropdown-item" href="">Register</a></li>
+              <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+              <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
               @endguest
                 
             

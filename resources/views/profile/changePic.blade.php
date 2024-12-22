@@ -29,10 +29,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="text-center">Choose Profile Picture</h3>
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('profile.edit.picture') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                     <div class="mb-3">
                         <label for="">Profile Image</label>
-                        <input type="file" name="image" id="" class="form-control">
+                        <input type="file" name="image" id="" class="form-control @error('image') is-invalid @enderror">
+                        @error('image')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="d-flex justify-content-end">
                         <input type="submit" value="Submit" class="btn btn-success">

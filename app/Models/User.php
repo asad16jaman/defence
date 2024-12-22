@@ -21,7 +21,26 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'img'
     ];
+
+
+
+    //courses
+    function courses(){
+        return $this->belongsToMany(Course::class,'course_user');
+    }
+
+    //all-commment
+    function feedbacks(){
+        return $this->hasMany(Feedack::class);
+    }
+
+    //profile
+    function profile(){
+        return $this->hasOne(Profile::class);
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

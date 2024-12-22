@@ -117,17 +117,22 @@ Route::get('/checkout/{id}',[HomePageController::class,'checkout'])->name('front
 
 
 //profile
-Route::prefix('/profile')->group(function(){
+Route::prefix('/profile')->middleware(['auth'])->group(function(){
 
     Route::get('/',[ProfileController::class,'index'])->name('profile');
+    Route::post('/',[ProfileController::class,'update_profile'])->name('profile');
+
     Route::get('/edit_picture',[ProfileController::class,'editPicture'])->name('profile.edit.picture');
+    Route::post('/edit_picture',[ProfileController::class,'updateProfilePicture'])->name('profile.edit.picture');
+
     Route::get('/feedack',[ProfileController::class,'feedback'])->name('profile.feedback');
+
     Route::get('/password',[ProfileController::class,'changePassword'])->name('profile.password.edit');
 
 
 
 
-
+    
 });
 
 
