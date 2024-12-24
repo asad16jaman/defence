@@ -1,12 +1,9 @@
 @extends('front.layout.layout')
 
-@section('title')
-  forum index page
-@endsection
 
-@section('content')
+@section('main')
 
-<div class="container">
+<div class="container" style="margin-top:50px">
         <div class="row">
              <div class="col-lg-10 col-12 offset-lg-1">
                 <div class="row">

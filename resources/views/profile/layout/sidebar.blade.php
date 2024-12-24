@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
       <img src="{{ asset('school/img/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">ITSD</span>
+      <span class="brand-text font-weight-light">EduTech Academy</span>
     </a>
 
     <!-- Sidebar -->
@@ -17,14 +17,10 @@
             <img src="{{ asset('assets/img/profile.png') }}" class="img-circle elevation-2" alt="Image set Nai">
 
             @endif
-             
-         
-            <!--  -->
-           
-          
+                       
         </div>
         <div class="info">
-          <a href="/profile/index.php" class="d-block">{{ auth()->user()->email }}</a>
+          <a href="{{ route('profile') }}" class="d-block">{{ auth()->user()->email }}</a>
         </div>
       </div>
 
@@ -43,7 +39,7 @@
              
               @if(auth()->user()->role == 'admin')
                 <li class="nav-item">
-                <a href="/admin/index.php" class="nav-link">
+                <a href="{{ route('admin.pannel') }}" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Admin</p>
                 </a>

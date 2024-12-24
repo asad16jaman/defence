@@ -136,8 +136,8 @@
                                         {{ $word_limit($course->description,30) }}...
                                     </p>
                                       <div class="d-flex justify-content-end">
-                                      <a href="" class="btn btn-primary mx-3">View Course</a>
-                                        <a href="" class="btn btn-secondary">Feedback</a>
+                                      <a href="{{ route('profile.course',$course->id) }}" class="btn btn-primary mx-3">View Course</a>
+                                        <a href="{{ route('profile.feedback',$course->id) }}" class="btn btn-secondary">Feedback</a>
                                       </div>
                                 </div>
                               </div>
@@ -155,16 +155,24 @@
                               <!-- Post -->
                           <div class="post">
                             <div class="user-block">
-                              <img class="img-circle img-bordered-sm" src="/admin/_assets/crs_thum/" alt="user image">
+                            @if(auth()->user()->img)
+                                <img src="{{ asset('storage')."/".auth()->user()->img }}" class="img-circle elevation-2" alt="User Image">
+
+                              @else
+                              <img src="{{ asset('assets/img/profile.png') }}" class="img-circle elevation-2" alt="Image set Nai">
+
+                              @endif
                               <span class="username">
                                 <a href="#">{{ $data->name }}</a>
-                                <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                                <a href="{{ route('profile.feedback.delete',$feedback->id) }}" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                               </span>
                               <span class="description">Time - 12-15-4578</span>
                             </div>
                             <!-- /.user-block -->
                             <p>
-                              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit, adipisci?
+                              {{
+                                $feedback->message
+                              }}
                             </p>
 
                           </div>

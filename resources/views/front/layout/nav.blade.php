@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md fixed-top">
+<nav class="navbar navbar-expand-md fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand text-white" href="#">
         <img src="{{ asset('school') }}/img/logo.png" height="30px" width="30px" alt="">
@@ -10,24 +10,19 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 navContent">
           <li class="nav-item">
-            <a class="nav-link text-white active" aria-current="page" href="{{ route('home') }}">Home</a>
+            <a class="nav-link text-white active" aria-current="page" href="{{route('home')}}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="{{ route('front.courses') }}">Courses</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="./#feedbackSection">Feedback</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white " href="./#contactPage">Contact</a>
+            <a class="nav-link text-white " href="{{ route('discus.index') }}">Discussion</a>
           </li>
         </ul>
         <div class="d-flex justify-contend-end">
           <div class="btn-group toggleMain ">
             <div class="drop-btn">
               
-            
-
             @auth
               @if(auth()->user()->img)
                 <img src="{{ asset('storage')."/".auth()->user()->img }}" class="profileImage" alt="User Image">

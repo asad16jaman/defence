@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class AuthController extends Controller
             'password' => "required|confirmed|min:2"
         ]);
 
-        User::create($request->all());
+        $newUser = User::create($request->all());
+        Profile::create(['user_id'=>$newUser->id]);
         return redirect()->route('login')->with('success','successfully registered now you can login');
     }
 

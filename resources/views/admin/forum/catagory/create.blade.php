@@ -1,17 +1,23 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-        <div class="container">
-            <div class="row mt-5">
-                
-                <div class="col-md-6 offset-md-3">
-                    <div class="card">
+@extends("admin.layout.layout")
+
+@section('main')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+ 
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+
+    <!-- /.content -->
+
+    <section>
+        <div class="container-fluid">
+             <!-- /.row -->
+        <div class="row px-3 py-3">
+          <div class="col-md-8 col-12 offset-md-2">
+           
+            <!-- /.card -->
+            <div class="card">
                         <div class="card-header">
                             <h3 class="text-center">Catagory Form</h3>
                         </div>
@@ -42,9 +48,27 @@
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
+            
+          </div>
         </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+        <!-- /.row -->
+        
+		
+        </div>
+    </section>
+
+</div>
+<!-- /.content-wrapper -->
+
+
+<footer class="main-footer">
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.2.0
+    </div>
+</footer>
+
+
+
+@endsection

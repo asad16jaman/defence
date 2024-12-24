@@ -53,18 +53,28 @@ threed page
 @endsection
 
 
-@section('content')
+@section('main')
 
 
-<div class="container">
+<div class="container" style="margin-top:80px">
     <div class="row mt-1 mb-3">
         <div class="col-md-8">
             <div class="jumbotron">
-                <h3 class="">{{$thread->title}}</h3>
-                <p class="lead"> {{ $thread->description }} </p>
+                <div class="card p-3">
+                    <div  class="d-flex card-header">
+                    <p style="color:#009fff;font-weight:700">Problame Title: </p>
+                    <p style="padding:0 5px"> {{$thread->title}}</p>
+                    </div>
+                    <div class="card-body d-flex">
+                        <p style="color:#009fff;font-weight:700">Description: </p>
+                        <p style="text-align:justify;padding:0px 13px"> {{ $thread->description  }} </p>
+                    </div>
+                </div>
+                
+
                 <hr>
                 <p class="lead">
-                    created by : Asad
+                   Give Sollution From Bellow.
                 </p>
             </div>
             <div>

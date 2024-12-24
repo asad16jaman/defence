@@ -46,8 +46,9 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>                    
-                      <th>Course Id</th>
+                      <th>#</th>
                       <th>Course Name</th>
+                      <th>Course Id</th>
                       <th>Author</th>
                       <th>Action</th>
                       <th>Add Lessons</th>
@@ -57,11 +58,13 @@
                     @foreach ($allCourses as $key=>$course)
                     <tr>
                       <td>{{ $key }}</td>
+                      
                       <td>{{ $course->name }}</td>
+                      <td>{{ $course->id }}</td>
                       <td><a href="{{ $course->user->id }}">{{ $course->user->name }}</a></td>                  
                       <td>
                         <a href="{{route('admin.course.edit', $course->id)}}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <form action="" method="post" onclick="return confirmDelete()">
+                        <form action="" method="post" onclick="return confirmDelete()" style="display:inline">
                             
                           <input type="hidden" name="delete_id" value="">
                             <button type="submit" class="btn btn-danger">

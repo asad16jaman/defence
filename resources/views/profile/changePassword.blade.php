@@ -24,7 +24,7 @@
                     <form action="" method="post">
                         <div class="mb-3">
                             <label for="">email</label>
-                            <input type="email" name="email" readonly value="" id="" class="form-control">
+                            <input type="email" name="email" readonly value="{{ auth()->user()->email }}" id="" class="form-control">
                             <p>this field is not changable</p>
                         </div>
                         <div class="mb-3">

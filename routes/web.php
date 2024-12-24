@@ -65,14 +65,7 @@ Route::middleware('auth')->group(function(){
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
-    // admin routing section
 
-Route::get('/catagory', [CatagoryController::class,'index'])->name('catagory_index');
-Route::get('/catagory/create', [CatagoryController::class,'create'])->name('catagory_create');
-Route::post('/catagory/store', [CatagoryController::class,'store'])->name('catagory_store');
-Route::get('/catagory/{id}/edit', [CatagoryController::class,'edit'])->name('catagory_edit');
-Route::post('/catagory/{id}/edit', [CatagoryController::class,'update'])->name('catagory_update');
-Route::get('/catagory/{id}/delete', [CatagoryController::class,'delete'])->name('catagory_delete');
 
 
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
@@ -125,7 +118,11 @@ Route::prefix('/profile')->middleware(['auth'])->group(function(){
     Route::get('/edit_picture',[ProfileController::class,'editPicture'])->name('profile.edit.picture');
     Route::post('/edit_picture',[ProfileController::class,'updateProfilePicture'])->name('profile.edit.picture');
 
-    Route::get('/feedack',[ProfileController::class,'feedback'])->name('profile.feedback');
+    Route::get('/feedack/{id?}',[ProfileController::class,'feedback'])->name('profile.feedback');
+    Route::post('/feedack/{id?}',[ProfileController::class,'storeFeedback'])->name('profile.feedback');
+    Route::get('/feedack/{id}/delete',[ProfileController::class,'deleteFeedback'])->name('profile.feedback.delete');
+
+    Route::get('/{id}/mycouse/{lesson?}',[ProfileController::class,'course'])->name('profile.course');
 
     Route::get('/password',[ProfileController::class,'changePassword'])->name('profile.password.edit');
 
@@ -138,8 +135,10 @@ Route::prefix('/profile')->middleware(['auth'])->group(function(){
 
 
 
-Route::prefix('/dashboard')->group(function(){
-    Route::get('/',[AdminController::class,'index']);
+Route::prefix('/dashboard')->middleware(['auth'])->group(function(){
+
+
+    Route::get('/',[AdminController::class,'index'])->name('admin.pannel');
 
     //courses
     Route::get('/courses',[CourseController::class,'index'])->name('admin.courses');
@@ -158,6 +157,21 @@ Route::prefix('/dashboard')->group(function(){
 
     //users
     Route::get('/users',[AdminUsersController::class,'index'])->name('admin.users');
+
+
+
+    //feedbacks
+    Route::get('/feedbacks',[AdminUsersController::class,'feedback'])->name('admin.feedback');
+
+
+    //dashboard    
+    Route::get('/catagory', [CatagoryController::class,'index'])->name('catagory_index');
+    Route::get('/catagory/create', [CatagoryController::class,'create'])->name('catagory_create');
+    Route::post('/catagory/store', [CatagoryController::class,'store'])->name('catagory_store');
+    Route::get('/catagory/{id}/edit', [CatagoryController::class,'edit'])->name('catagory_edit');
+    Route::post('/catagory/{id}/edit', [CatagoryController::class,'update'])->name('catagory_update');
+    Route::get('/catagory/{id}/delete', [CatagoryController::class,'delete'])->name('catagory_delete');
+
 
 
 });

@@ -1,18 +1,49 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-12">
+@extends("admin.layout.layout")
+
+@section('main')
+<a href="{{ route('catagory_create') }}" class="btn btn-danger" style="position:fixed;bottom:60px;right:10px;z-index:22"><i class="fa fa-plus" aria-hidden="true"></i></a>
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">All Threads</h1>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+
+    <!-- /.content -->
+
+    <section>
+        <div class="container-fluid">
+             <!-- /.row -->
+        <div class="row px-3 py-3">
+          <div class="col-12">
             <div class="card">
-                <div class="card-body">
-                <table class="table">
+              <div class="card-header">
+                <h3 class="card-title"> All Threads </h3>
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+              <table class="table">
                 <thead class="table-light">
                     <tr>
                         <th>ID</th>
@@ -44,11 +75,40 @@
                     
                 </tbody>
             </table>
-                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+               
+                </ul>
+              </div>
+              
+
+
+
+
             </div>
-            </div>
+            <!-- /.card -->
+            
+          </div>
         </div>
+        <!-- /.row -->
+        
+		
+        </div>
+    </section>
+
+</div>
+<!-- /.content-wrapper -->
+
+
+<footer class="main-footer">
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.2.0
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+</footer>
+
+
+@endsection

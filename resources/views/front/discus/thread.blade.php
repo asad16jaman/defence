@@ -7,7 +7,7 @@
 <style>
 
 .jumbotron{
-            background: #80808045;
+            background: linear-gradient(rgba(0,0,0,0.4),rgb(0, 0, 0,0.3)),url({{ asset('forum').'/thum/'.$catagory->thumbnail}}) no-repeat center/cover;
             padding: 67px 26px;
             border-radius: 10px;
             margin-bottom: 30px;
@@ -25,15 +25,14 @@
 @endsection
 
 
-@section('content')
-    <div class="container">
+@section('main')
+    <div class="container" style="margin-top:80px;">
         <div class="row">
             <div class="col-md-8 col-12">
-                <div class="jumbotron">
-                    <h1 class="">Wellcome to {{ $catagory->name }} discussion  forum</h1>
-                    <p class="lead">{{ $catagory->description}}</p>
+                <div class="jumbotron" >
+                    <h1 class="text-light">Wellcome to {{ $catagory->name }} discussion  forum</h1>
                     <hr>
-                    <p class="lead">
+                    <p class="">
                         Ask Your Question below form 
                     </p>
                 </div>

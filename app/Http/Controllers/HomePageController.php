@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Feedack;
 use DB;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,11 @@ class HomePageController extends Controller
     function index(){
 
         $popular = DB::table('courses')->join('populers','courses.id' ,'=','populers.course_id')->get();
-
+        $feedbacks = Feedack::with('user')->orderByDesc('id')->paginate(6);
        
+        // return response()->json($feedbacks);
         
-        return view('school.index',['populers'=>$popular]);
+        return view('school.index',['populers'=>$popular,'feedbacks'=>$feedbacks]);
     }
 
     function course(int $id){
@@ -27,7 +29,10 @@ class HomePageController extends Controller
     }
 
     function allCourse(){
-        return view('school.front.courses');
+
+
+        $allCrs = Course::get();
+        return view('school.front.courses',['allCourse'=>$allCrs]);
     }
 
     function checkout(int $id){
