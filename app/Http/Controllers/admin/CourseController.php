@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Lessone;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -112,7 +113,7 @@ class CourseController extends Controller
                     'crs_thum', 'public'
                 );
             }catch(\Exception $e){
-                return redirect()->route('');
+                return redirect()->route('admin.problame');
             }
 
         }
@@ -132,6 +133,58 @@ class CourseController extends Controller
         return redirect()->route('admin.courses');
 
     }
+
+    function delete_lesson(int $lesson):void{
+        $lesson = Lessone::find($lesson);
+        
+        if($lesson){
+
+           try{
+            if(file_exists(storage_path().'/app/public/'.$lesson->video)){
+                unlink(storage_path().'/app/public/'.$lesson->video);
+            }
+            $lesson->delete();
+           
+
+           }catch(\Exception $e){
+            
+           }
+        }else{
+
+           
+        }
+    }
+
+    function delete(int $id){
+
+        $delete_course = Course::find($id);
+
+        if($delete_course){
+            try{
+
+                if(file_exists(storage_path().'/app/public/'.$delete_course->thum)){
+                    unlink(storage_path().'/app/public/'.$delete_course->thum);
+                }
+    
+                $lessons = Lessone::where('course_id',$id)->get();
+                foreach($lessons as $lsn){
+                    $this->delete_lesson($lsn->id);
+                    $lsn->delete();
+                }
+                
+                $delete_course->delete();
+                return redirect()->route('admin.courses');
+
+            }catch(\Exception $e){
+                return redirect()->route('admin.problame');
+            }
+
+        }
+        
+    }
+
+
+
 
 
 

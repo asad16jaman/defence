@@ -60,13 +60,30 @@
                       <td><a href="">{{ $feedback->user->name}}</a></td>                  
                       <td>{{ $feedback->course->name}}</td>                  
                       <td>
-                        <form action="" method="post" onclick="return confirmDelete()">
-                           
-                          <input type="hidden" name="delete_id" value="">
-                            <button  type="submit" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalDanger{{$feedback->id}}">
                             <i class="fa-solid fa-trash"></i>
                             </button>
-                        </form>
+                            <!-- Modal delete lesson  -->
+                            <div class="modal fade" id="modalDanger{{$feedback->id}}" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content bg-danger">
+                              <form action="{{ route('admin.feedback.delete',$feedback->id) }}" method="post">
+                              @csrf
+                            
+                              <div class="modal-body">
+                              <p>Are you sure you want to delete…?</p>
+                              </div>
+                              <div class="modal-footer justify-content-between">
+                              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cancle</button>
+                              <!-- <button type="button" class=""></button> -->
+                              <input type="submit" value="Delete" class="btn btn-outline-light">
+                              </div>
+                              </form>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                            </div>
                       </td>
 
                     </tr>

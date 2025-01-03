@@ -53,12 +53,38 @@
             <p>Threads</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{ route('admin.users') }}" class="nav-link">
-            <i class="fa fa-users" aria-hidden="true"></i>
-            <p>Users</p>
-          </a>
-        </li>
+
+        <li class="nav-item menu-is-opening menu-open">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-file-invoice"></i>
+                <p>
+                  Accounts
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+            <ul class="nav nav-treeview" style="display: block;">
+              <li class="nav-item">
+                <a href="{{ route('admin.users','instructor') }}" class="nav-link">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                  <p>Instructors</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.users','student') }}" class="nav-link">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                  <p>Students</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.users','user') }}" class="nav-link">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                  <p>Users</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
         <li class="nav-item">
           <a href="/admin/sell_report.php" class="nav-link">
             <i class="fa-solid fa-receipt"></i>

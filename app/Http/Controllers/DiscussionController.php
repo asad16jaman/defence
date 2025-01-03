@@ -23,8 +23,6 @@ class DiscussionController extends Controller
             return $qry->select('id','email','name');
         }])->latest()->get();
 
-       
-
         return view('front.discus.thread',['catagory'=>$catagory,'threads'=>$threards]);
     }
 

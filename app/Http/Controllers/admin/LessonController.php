@@ -83,6 +83,88 @@ class LessonController extends Controller
 
     }
 
+    function edit(int $lesson){
+
+        $lesson = Lessone::with(['course'=>function($qury){
+            $qury->select('id','name');
+        }])->find($lesson);
+        // return response()->json($lesson);
+
+        return view('admin.lessons.edit',['lesson'=>$lesson]);
+
+
+    }
+
+    function update(Request $request,int $lesson){
+
+        $valid = Validator::make($request->all(),[
+            'name' => 'required|min:3'
+        ]);
+        if($valid->fails()){
+            return redirect()->route('admin.lesson.edit',$lesson)
+            ->withErrors($valid->errors())
+            ->withInput($request->only('name'));
+        }
+
+        $edit_lesson = Lessone::find($lesson);
+        $course_id = $edit_lesson->course_id;
+
+
+        $update_data = [
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ];
+
+        $newName = null;
+        if($request->has('video')){
+            try{
+                
+                if(file_exists(storage_path().'/app/public/'.$edit_lesson->video)){
+                    unlink(storage_path().'/app/public/'.$edit_lesson->video);
+                }
+
+                $newName = $request->file('video')->store(
+                    'lsn_video', 'public'
+                );
+                $update_data['video'] = $newName;
+            }catch(\Exception $e){
+                return redirect()->route('admin.problame');
+            }
+
+        }
+
+        $edit_lesson->update($update_data);
+        
+        return redirect()->route('admin.lesson',$course_id);
+
+    }
+
+
+
+
+    function deleteLesson(int $lesson){
+
+        $lesson = Lessone::find($lesson);
+        $course_id = $lesson->course_id;
+        if($lesson){
+
+           try{
+            if(file_exists(storage_path().'/app/public/'.$lesson->video)){
+                unlink(storage_path().'/app/public/'.$lesson->video);
+            }
+            $lesson->delete();
+            return redirect()->route('admin.lesson',$course_id);
+
+           }catch(\Exception $e){
+            return redirect()->route('admin.problame');
+           }
+        }else{
+
+            return redirect()->route('admin.lesson');
+        }
+
+    }
+
 
 
 

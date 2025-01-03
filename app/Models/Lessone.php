@@ -16,6 +16,10 @@ class Lessone extends Model
             'course_id'
     ];
 
+    function course(){
+        return $this->belongsTo(Course::class);
+    }
+
 
 
 

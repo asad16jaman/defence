@@ -32,7 +32,7 @@
                 <div class="jumbotron" >
                     <h1 class="text-light">Wellcome to {{ $catagory->name }} discussion  forum</h1>
                     <hr>
-                    <p class="">
+                    <p class="text-light">
                         Ask Your Question below form 
                     </p>
                 </div>

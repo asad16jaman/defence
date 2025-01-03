@@ -104,10 +104,11 @@ Route::get('/',[HomePageController::class,'index'])->name('home');
 
 Route::get('/courses',[HomePageController::class,'allCourse'])->name('front.courses');
 Route::get('/course/{id}',[HomePageController::class,'course'])->name('front.course');
-Route::get('/checkout/{id}',[HomePageController::class,'checkout'])->name('front.checkout');
 
 
 
+Route::get('/checkout/{id}',[HomePageController::class,'checkout'])->name('front.checkout')->middleware('auth');
+Route::post('/enroll_course',[HomePageController::class,'enrollCourse'])->name('enroll_course')->middleware('auth');
 
 //profile
 Route::prefix('/profile')->middleware(['auth'])->group(function(){
@@ -125,6 +126,8 @@ Route::prefix('/profile')->middleware(['auth'])->group(function(){
     Route::get('/{id}/mycouse/{lesson?}',[ProfileController::class,'course'])->name('profile.course');
 
     Route::get('/password',[ProfileController::class,'changePassword'])->name('profile.password.edit');
+
+    
 
 
 
@@ -146,22 +149,32 @@ Route::prefix('/dashboard')->middleware(['auth'])->group(function(){
     Route::post('/courses/create',[CourseController::class,'store'])->name('admin.course.create');
     Route::get('/courses/{id}/edit/',[CourseController::class,'edit'])->name('admin.course.edit');
     Route::post('/courses/{id}/edit',[CourseController::class,'update'])->name('admin.course.edit');
+    Route::post('/courses/{id}/delete',[CourseController::class,'delete'])->name('admin.course.delete');
 
 
     //lesson
     Route::get('/lessons/{course?}',[LessonController::class,'index'])->name('admin.lesson');
     Route::get('/lesson/{course}/create',[LessonController::class,'create'])->name('admin.lesson.create');
     Route::post('/lesson/{course}/create',[LessonController::class,'store'])->name('admin.lesson.create');
+    Route::get('/lesson/{lesson}/edit',[LessonController::class,'edit'])->name('admin.lesson.edit');
+    Route::post('/lesson/{lesson}/edit',[LessonController::class,'update'])->name('admin.lesson.edit');
+    Route::post('/lesson/{lesson}/delete',[LessonController::class,'deleteLesson'])->name('admin.lesson.delete');
 
 
 
     //users
-    Route::get('/users',[AdminUsersController::class,'index'])->name('admin.users');
+    Route::get('/users/{type}',[AdminUsersController::class,'index'])->name('admin.users');
+    Route::get('/user/create',[AdminUsersController::class,'create'])->name('admin.users.create');
+    Route::post('/user/create',[AdminUsersController::class,'store'])->name('admin.users.create');
+    Route::get('/user/{id}/edit',[AdminUsersController::class,'edit'])->name('admin.users.edit');
+    Route::post('/user/{id}/update',[AdminUsersController::class,'update'])->name('admin.users.update');
+    Route::post('/users/{id}/delete',[AdminUsersController::class,'deleteUser'])->name('admin.users.delete');
 
 
 
     //feedbacks
     Route::get('/feedbacks',[AdminUsersController::class,'feedback'])->name('admin.feedback');
+    Route::post('/feedback/{id}',[AdminUsersController::class,'feedbackDelete'])->name('admin.feedback.delete');
 
 
     //dashboard    
@@ -171,6 +184,12 @@ Route::prefix('/dashboard')->middleware(['auth'])->group(function(){
     Route::get('/catagory/{id}/edit', [CatagoryController::class,'edit'])->name('catagory_edit');
     Route::post('/catagory/{id}/edit', [CatagoryController::class,'update'])->name('catagory_update');
     Route::get('/catagory/{id}/delete', [CatagoryController::class,'delete'])->name('catagory_delete');
+
+
+
+    Route::get('/problame',function(){
+        return "<h1>There is some problame...</h1>";
+    })->name('admin.problame');
 
 
 

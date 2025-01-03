@@ -4,7 +4,7 @@
 
 
 @if($course)
-<a href="{{ route('admin.lesson.create',$course) }}"  class="btn btn-danger" style="position:fixed;bottom:60px;right:10px"><i class="fa fa-plus" aria-hidden="true"></i><a/>
+<a href="{{ route('admin.lesson.create', $course) }}"  class="btn btn-danger" style="position:fixed;bottom:60px;right:10px"><i class="fa fa-plus" aria-hidden="true"></i><a/>
 @endif
 
 <!-- Content Wrapper. Contains page content -->
@@ -27,7 +27,32 @@
 
             </form>
 
+           
+
         </div><!-- /.container-fluid -->
+
+
+
+
+
+
+
+      <!-- Button trigger modal -->
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <!-- /.content-header -->
 
@@ -56,28 +81,45 @@
                   <tbody>
 
                     @if($course)
-                      @foreach ($lessons as $key=>$lesson)
-                      <tr>
-                      <td>{{ $key+1 }}</td>
-                      <td>{{ $lesson->name }}</td>
-                      <td>{{ $lesson->video }}</td>
-                   
-                      <td>
-                        <form action="" method="post" onclick="return confirmDelete()">
-                            <a href="" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+              @foreach ($lessons as $key => $lesson)
+          <tr>
+          <td>{{ $key + 1 }}</td>
+          <td>{{ $lesson->name }}</td>
+          <td>{{ $lesson->video }}</td>
 
-                          <input type="hidden" name="delete_id" value="">
-                            <button type="submit"  class="btn btn-danger">
-                            <i class="fa-solid fa-trash"></i>
-                            </button>
-                       </form>
-                      </td>                    
-                    </tr>
-                      
-                      @endforeach
+          <td class="d-flex">
+                <a href="{{ route('admin.lesson.edit',$lesson->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalDanger{{$lesson->id}}">
+                <i class="fa-solid fa-trash"></i>
+                </button>
+                <!-- Modal delete lesson  -->
+                <div class="modal fade" id="modalDanger{{$lesson->id}}" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content bg-danger">
+                  <form action="{{ route('admin.lesson.delete',$lesson->id) }}" method="post">
+                  @csrf
+                 
+                  <div class="modal-body">
+                  <p>Are you sure you want to delete…?</p>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cancle</button>
+                  <!-- <button type="button" class=""></button> -->
+                  <input type="submit" value="Delete" class="btn btn-outline-light">
+                  </div>
+                  </form>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+                </div>
+          </td>                    
+        </tr>
+
+        @endforeach
 
 
-                    @endif
+          @endif
                       
                    
                   </tbody>
@@ -94,6 +136,12 @@
    
 </div>
 <!-- /.content-wrapper -->
+
+
+
+
+
+
 
 
 <footer class="main-footer">

@@ -36,25 +36,32 @@
                     Card Detail
                 </div>
                 <div class="card-body">
-                    <p>Name: Asad</p>
-                    <p>Email: asad@gmail.com</p>
-                    <p>Phone: 124577</p>
-                    <p>City: Dhaka</p>
-                    <p>Address: Tongi,Dhaka</p>
+                    <p>Name: {{ auth()->user()->name }}</p>
+                    <p>Email: {{ auth()->user()->email}}</p>
+                    <p>Phone: {{ $profile->phone ?? "Not set yeat"}}</p>
+                    <p>City: {{ $profile->city ?? "Not set yeat"}}</p>
+                    <p>Address: {{ $profile->address ?? "Not set yeat"}}</p>
                     <p>Course Name: {{$course->name}}</p>
                     <p>Cost : {{$course->sell_price}}</p>
                 </div>
                 <div class="card-footer">
                     <div class="d-grid gap-2">
-                       
-                            <form action="" method="post">
-                                <input type="text" hidden name="amount"  value="" id="">
-                                <input type="text" hidden name="course_name" value="" id="">
+                        
+                            @if($isEnroll)
+                            <p class="text-center">You Have purches this course</p>
+                            
+                            @else
+                            <form action="{{ route('enroll_course') }}" method="post">
+                                @csrf
+                                <input type="text" hidden name="amount"  value="{{ $course->sell_price }}" id="">
+                                <input type="text" hidden name="course_id" value="{{ $course->id }}" id="">
                                 <input type="submit" value="Checkout" class="btn btn-primary">
                             </form>
 
+                            @endif
+
                       
-                                <!-- <p class="text-center">You Have purches this course</p> -->
+                                <!--  -->
                      
                        
                     </div>

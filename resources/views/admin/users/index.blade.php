@@ -2,7 +2,7 @@
 
 @section("main")
 
-<a href="./add_student.php" class="btn btn-danger" style="position:fixed;bottom:30px;right:50px;z-index:789"><i class="fa fa-plus" aria-hidden="true"></i></a>
+<a href="{{ route('admin.users.create') }}" class="btn btn-danger" style="position:fixed;bottom:30px;right:50px;z-index:789"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -52,7 +52,7 @@
                       <th style="width: 10px">#</th>
                       <th>Name</th>
                       <th>Email</th>
-                      <th style="width: 40px">Occupation</th>
+                      <th style="width: 40px">Role</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -64,16 +64,32 @@
                       <td>{{ $user->email}}</td>
                       <td>{{ $user->role }}</td>
                       <td>
-                      <form action="" method="post" onclick="return confirmDelete()">
-                            <!-- <a href="#" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
-                             <input type="hidden" name="delete_id" value="">
-                            </a>
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fa-solid fa-trash"></i>
-
-                            </button>
-                            <a href="" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                        </form>
+                      <a href="{{ route('admin.users.edit',$user->id) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                      
+                        <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modalDanger{{$user->id}}">
+                          <i class="fa-solid fa-trash"></i>
+                          </button>
+                          <!-- Modal delete lesson  -->
+                          <div class="modal fade" id="modalDanger{{$user->id}}" style="display: none;" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content bg-danger">
+                            <form action="{{ route('admin.users.delete',$user->id) }}" method="post">
+                            @csrf
+                          
+                            <div class="modal-body">
+                            <p>Are you sure you want to delete…?</p>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cancle</button>
+                            <!-- <button type="button" class=""></button> -->
+                            <input type="submit" value="Delete" class="btn btn-outline-light">
+                            </div>
+                            </form>
+                            </div>
+                            <!-- /.modal-content -->
+                          </div>
+                          <!-- /.modal-dialog -->
+                          </div>
 
                       </td>
                     </tr>

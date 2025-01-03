@@ -64,8 +64,9 @@
                     <div class="card-body">
                         <ul class="list-group">
                             @if(count($course->lessons)>0)
+                                
                                 @foreach ($course->lessons as $key=>$lesson)
-                                    @if((!$current_lesson && $key == 0 ) || $current_lesson->id == $lesson->id)
+                                    @if((!$current_lesson && $key == 0 ) || ($current_lesson && $current_lesson->id == $lesson->id) )
                                     <li class='list-group-item active'><a style='color:#ffffff' href='{{ route('profile.course',['id'=>$course->id,'lesson'=>$lesson->id]) }}' >{{ $lesson->name }}</a></li>
                                     @else
                                     <li style="" class='list-group-item '><a href='{{ route('profile.course',['id'=>$course->id,'lesson'=>$lesson->id]) }}' >{{ $lesson->name }}</a></li>

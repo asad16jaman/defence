@@ -138,6 +138,7 @@ class ProfileController extends Controller
         $course = Course::with('lessons')->find($id);
         $lesson = null;
         $lesson = Lessone::find($lesson);
+        // return response()->json($course);
 
         return view('profile.course',['course'=>$course,'current_lesson'=>$lesson]);
     }
